@@ -5,3 +5,4 @@ authors = ["Jake Howard <git@theorangeone.net>"]
 
 [dependencies]
 executors = "0.4"
+num_cpus = "1.0"
