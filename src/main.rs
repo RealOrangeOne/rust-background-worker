@@ -9,7 +9,7 @@ struct Worker {
     pool: ThreadPool,
 }
 
-trait Workable: Send + Clone + 'static {
+trait Workable: Send + 'static {
     fn execute(&self);
 }
 
@@ -29,10 +29,7 @@ impl Worker {
     }
 }
 
-#[derive(Clone)]
-struct Job1 {
-    data: [i64; 1000],
-}
+struct Job1;
 
 impl Workable for Job1 {
     fn execute(&self) {
@@ -42,9 +39,7 @@ impl Workable for Job1 {
 
 fn main() {
     let worker = Worker::start(num_cpus::get());
-    worker.schedule(Job1 {
-        data: [2000000000; 1000],
-    }); // Big data!
+    worker.schedule(Job1 {});
     thread::sleep(time::Duration::from_millis(1000));
     println!("Done");
 }
